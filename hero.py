@@ -7,19 +7,19 @@ os.system("adb pull /sdcard/screenshot.png d:/screenshot.png")
 host = 'http://text.aliapi.hanvon.com'
 path = '/rt/ws/v1/ocr/text/recg'
 method = 'POST'
-appcode = 'a962e94260ee4043b824d2f40c126d8e'
+appcode = 'a962e94260ee4043b824d2f40c126d8e'    #汉王识别appcode（填你自己的）
 querys = 'code=74e51a88-41ec-413e-b162-bd031fe0407e'
 bodys = {}
 url = host + path + '?' + querys
 
-im = Image.open(r"D:\screenshot.png")
+im = Image.open(r"D:\screenshot.png")   
 
 img_size = im.size
 w = im.size[0]
 h = im.size[1]
 print("xx:{}".format(img_size))
 
-region = im.crop((70,200, w-70,700))
+region = im.crop((70,200, w-70,700))    #裁剪的区域
 region.save("d:/crop_test1.png")
 
 
@@ -46,7 +46,7 @@ if (content):
 
 #pyperclip.copy(''.join(decode_json['textResult'].split()))
 
-keyword = ''.join(decode_json['textResult'].split())
+keyword = ''.join(decode_json['textResult'].split())    #识别的问题文本
 
 convey = 'n'
 
@@ -66,4 +66,4 @@ for result in results:
 		break
 
 end = time.time()
-print(end-start)
+print('程序用时：'+str(end-start)+'秒')
