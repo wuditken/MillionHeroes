@@ -10,7 +10,7 @@
 
 汉王ocr：https://market.aliyun.com/products/57124001/cmapi011523.html?spm=5176.730005.0.0.B1mZNd#sku=yuncode552300000
 
-
+![截图](http://chuantu.biz/t6/198/1515261841x-1566687351.png)
 
 
 一开始也想要tesseract来识别，但是经过测试太慢了要用10秒左右。
