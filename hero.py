@@ -1,30 +1,32 @@
-import urllib.request, sys,base64,json,os,time,pyperclip,baiduSearch
+import urllib.request, sys,base64,json,os,time,baiduSearch,screenshot,re
 from PIL import Image
+from common import config
+#配置appcode
+config = config.open_accordant_config()
 
 start = time.time()
-os.system("adb shell /system/bin/screencap -p /sdcard/screenshot.png") 
-os.system("adb pull /sdcard/screenshot.png d:/screenshot.png")  
+# 开始截图
+screenshot.check_screenshot()
+screenshot.pull_screenshot()
 host = 'http://text.aliapi.hanvon.com'
 path = '/rt/ws/v1/ocr/text/recg'
 method = 'POST'
-appcode = 'a962e94260ee4043b824d2f40c126d8e'    #汉王识别appcode（填你自己的）
+appcode = config['appcode']    #汉王识别appcode（填你自己的）
 querys = 'code=74e51a88-41ec-413e-b162-bd031fe0407e'
 bodys = {}
 url = host + path + '?' + querys
 
-im = Image.open(r"D:\screenshot.png")   
+im = Image.open(r"./screenshot.png")   
 
 img_size = im.size
 w = im.size[0]
 h = im.size[1]
 print("xx:{}".format(img_size))
 
-region = im.crop((70,200, w-70,700))    #裁剪的区域
-region.save("d:/crop_test1.png")
+region = im.crop((70,300, w-70,600))    #裁剪的区域 百万超人 手机1080*1920 高度范围300~600
+region.save("./crop_test1.png")
 
-
-
-f=open('d:/crop_test1.png','rb') 
+f=open('./crop_test1.png','rb') 
 ls_f=base64.b64encode(f.read())
 f.close()
 s = bytes.decode(ls_f) 
@@ -47,7 +49,7 @@ if (content):
 #pyperclip.copy(''.join(decode_json['textResult'].split()))
 
 keyword = ''.join(decode_json['textResult'].split())    #识别的问题文本
-
+keyword = re.sub(r"\d+.","",keyword,1)
 convey = 'n'
 
 if convey == 'y' or convey == 'Y':
@@ -67,3 +69,4 @@ for result in results:
 
 end = time.time()
 print('程序用时：'+str(end-start)+'秒')
+print(keyword)

@@ -1,0 +1,5 @@
+Pillow==5.0.0
+requests==2.18.4
+bs4
+wheel
+lxml
