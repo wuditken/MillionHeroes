@@ -1,6 +1,8 @@
-import urllib.request, sys,base64,json,os,time,baiduSearch,screenshot
+import urllib.request, sys,base64,json,os,time,baiduSearch,screenshot,re
 from PIL import Image
-import re
+from common import config
+#配置appcode
+config = config.open_accordant_config()
 
 start = time.time()
 # 开始截图
@@ -9,7 +11,7 @@ screenshot.pull_screenshot()
 host = 'http://text.aliapi.hanvon.com'
 path = '/rt/ws/v1/ocr/text/recg'
 method = 'POST'
-appcode = 'ee0fc729b93849d0b2523c1207639bb4'    #汉王识别appcode（填你自己的）
+appcode = config['appcode']    #汉王识别appcode（填你自己的）
 querys = 'code=74e51a88-41ec-413e-b162-bd031fe0407e'
 bodys = {}
 url = host + path + '?' + querys
