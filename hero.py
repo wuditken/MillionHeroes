@@ -8,7 +8,7 @@ screenshot.pull_screenshot()
 host = 'http://text.aliapi.hanvon.com'
 path = '/rt/ws/v1/ocr/text/recg'
 method = 'POST'
-appcode = 'a962e94260ee4043b824d2f40c126d8e'    #汉王识别appcode（填你自己的）
+appcode = 'ee0fc729b93849d0b2523c1207639bb4'    #汉王识别appcode（填你自己的）
 querys = 'code=74e51a88-41ec-413e-b162-bd031fe0407e'
 bodys = {}
 url = host + path + '?' + querys
@@ -21,7 +21,7 @@ h = im.size[1]
 print("xx:{}".format(img_size))
 
 region = im.crop((70,300, w-70,600))    #裁剪的区域 百万超人 手机1080*1920 高度范围300~600
-
+region.save("./crop_test1.png")
 
 f=open('./crop_test1.png','rb') 
 ls_f=base64.b64encode(f.read())
