@@ -37,7 +37,7 @@ request.add_header('Authorization', 'APPCODE ' + appcode)
 request.add_header('Content-Type', 'application/json; charset=UTF-8')
 request.add_header('Content-Type', 'application/octet-stream')
 response = urllib.request.urlopen(request)
-content = response.read()
+content =  bytes.decode(response.read()) 
 if (content):
    
     decode_json = json.loads(content)
