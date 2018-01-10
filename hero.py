@@ -1,5 +1,6 @@
 import urllib.request, sys,base64,json,os,time,baiduSearch,screenshot
 from PIL import Image
+import re
 
 start = time.time()
 # 开始截图
@@ -46,7 +47,7 @@ if (content):
 #pyperclip.copy(''.join(decode_json['textResult'].split()))
 
 keyword = ''.join(decode_json['textResult'].split())    #识别的问题文本
-
+keyword = re.sub(r"\d+.","",keyword,1)
 convey = 'n'
 
 if convey == 'y' or convey == 'Y':
@@ -66,3 +67,4 @@ for result in results:
 
 end = time.time()
 print('程序用时：'+str(end-start)+'秒')
+print(keyword)
