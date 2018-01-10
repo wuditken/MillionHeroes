@@ -1,9 +1,10 @@
-import urllib.request, sys,base64,json,os,time,pyperclip,baiduSearch
+import urllib.request, sys,base64,json,os,time,baiduSearch,screenshot
 from PIL import Image
 
 start = time.time()
-os.system("adb shell /system/bin/screencap -p /sdcard/screenshot.png") 
-os.system("adb pull /sdcard/screenshot.png d:/screenshot.png")  
+# 开始截图
+screenshot.check_screenshot()
+screenshot.pull_screenshot()
 host = 'http://text.aliapi.hanvon.com'
 path = '/rt/ws/v1/ocr/text/recg'
 method = 'POST'
@@ -12,19 +13,17 @@ querys = 'code=74e51a88-41ec-413e-b162-bd031fe0407e'
 bodys = {}
 url = host + path + '?' + querys
 
-im = Image.open(r"D:\screenshot.png")   
+im = Image.open(r"./screenshot.png")   
 
 img_size = im.size
 w = im.size[0]
 h = im.size[1]
 print("xx:{}".format(img_size))
 
-region = im.crop((70,200, w-70,700))    #裁剪的区域
-region.save("d:/crop_test1.png")
+region = im.crop((70,300, w-70,600))    #裁剪的区域 百万超人 手机1080*1920 高度范围300~600
 
 
-
-f=open('d:/crop_test1.png','rb') 
+f=open('./crop_test1.png','rb') 
 ls_f=base64.b64encode(f.read())
 f.close()
 s = bytes.decode(ls_f) 
