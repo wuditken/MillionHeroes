@@ -11,7 +11,7 @@
 百度ocr：http://ai.baidu.com/tech/ocr/general
 
 # 需要的模块在命令行输入（pip install 模块名称） 安装
-模块名称： baidu-aip  lxml  Pillow  requests bs4
+# 模块名称： baidu-aip  lxml  Pillow  requests bs4
 
 ![截图](http://chuantu.biz/t6/198/1515261841x-1566687351.png)
 
