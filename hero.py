@@ -12,7 +12,7 @@ querys = 'code=74e51a88-41ec-413e-b162-bd031fe0407e'
 bodys = {}
 url = host + path + '?' + querys
 
-im = Image.open(r"D:\screenshot.png")   
+im = Image.open(r"./screenshot.png")   
 
 img_size = im.size
 w = im.size[0]
@@ -20,11 +20,11 @@ h = im.size[1]
 print("xx:{}".format(img_size))
 
 region = im.crop((70,200, w-70,700))    #裁剪的区域
-region.save("d:/crop_test1.png")
+region.save(r"./crop_test1.png")
 
 
 
-f=open('d:/crop_test1.png','rb') 
+f=open(r'./crop_test1.png','rb') 
 ls_f=base64.b64encode(f.read())
 f.close()
 s = bytes.decode(ls_f) 
