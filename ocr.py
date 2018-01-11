@@ -7,7 +7,7 @@ def ocr(image):
 	host = 'http://text.aliapi.hanvon.com'
 	path = '/rt/ws/v1/ocr/text/recg'
 	method = 'POST'
-	appcode = 'a962e94260ee4043b824d2f40c126d8e'    #汉王识别appcode（填你自己的）
+	appcode = 'a962e94260ee4043b824d2f40c126d8ed'    #汉王识别appcode（填你自己的）
 	querys = 'code=74e51a88-41ec-413e-b162-bd031fe0407e'
 	bodys = {}
 	url = host + path + '?' + querys
@@ -35,9 +35,9 @@ def ocr(image):
 
 	'''
 	""" （百度ocr）你的 APPID AK SK """
-	APP_ID = '10675766'
-	API_KEY = '3LXbCnaZ5TUx9T5hpzyP7pw2'
-	SECRET_KEY = 'TfKCxzZxjyTxHhOm1k2o2C5RCHiW52tl'
+	APP_ID = '1067576692'
+	API_KEY = '3LXbCnaZ5TUx9T5hpzyP7pw2j'
+	SECRET_KEY = 'TfKCxzZxjyTxHhOm1k2o2C5RCHiW52tll'
 	client = AipOcr(APP_ID, API_KEY, SECRET_KEY)
 
 	def get_file_content(filePath):
