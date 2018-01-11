@@ -3,3 +3,4 @@ requests==2.18.4
 bs4
 wheel
 lxml
+baidu-aip==2.0.0.1

@@ -1,3 +1,4 @@
+# -*- coding:utf-8 -*-
 import requests
 from bs4 import BeautifulSoup
 
@@ -43,7 +44,11 @@ def page(html):
 
     # 获取结果来源
     result_set = soup.find(id='content_left')  # 结果全显示在页面左边
-    result_set = result_set.find_all('div', class_='c-container')  # 结果class固定，其余为硬广
+    if result_set is None:
+        print("抓取失败，跳过")
+        #return
+    else:
+        result_set = result_set.find_all('div', class_='c-container')  # 结果class固定，其余为硬广
 
     for i in range(len(result_set)):  # 因为要index所以就用range来
         result = result_set[i]  # 其实就是result_div
