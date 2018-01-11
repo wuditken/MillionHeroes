@@ -43,7 +43,7 @@ def ocr(image):
 	def get_file_content(filePath):
 		with open(filePath, 'rb') as fp:
 			return fp.read()
-	image = get_file_content(r"D:\LDJ\misc\misc\MillionHero\MillionHeroes-master\crop\\"+image)
+	image = get_file_content(r"D:\million\crop\\"+image)
 	respon = client.basicGeneral(image)
 	titles = respon['words_result']          #获取问题
 	ans = ''
