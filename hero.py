@@ -1,9 +1,12 @@
-import urllib.request, sys,base64,json,os,time,pyperclip,baiduSearch
+import urllib.request, sys,base64,json,os,time,baiduSearch
 from PIL import Image
+from aip import AipOcr
 
 start = time.time()
 os.system("adb shell /system/bin/screencap -p /sdcard/screenshot.png") 
-os.system("adb pull /sdcard/screenshot.png ./screenshot.png")  
+os.system("adb pull /sdcard/screenshot.png ./screenshot.png")
+'''
+汉王ocr 涨价涨价了。。
 host = 'http://text.aliapi.hanvon.com'
 path = '/rt/ws/v1/ocr/text/recg'
 method = 'POST'
@@ -11,6 +14,14 @@ appcode = 'a962e94260ee4043b824d2f40c126d8e'    #汉王识别appcode（填你自
 querys = 'code=74e51a88-41ec-413e-b162-bd031fe0407e'
 bodys = {}
 url = host + path + '?' + querys
+'''
+""" （百度ocr）你的 APPID AK SK """
+APP_ID = '10673785'
+API_KEY = 'FqRvrpPwhSNXt2FhT6d3dXfc'
+SECRET_KEY = 'UIu2qOPHXENScjr1yzAyXQgNkLQzkcdc'
+client = AipOcr(APP_ID, API_KEY, SECRET_KEY)
+
+
 
 im = Image.open(r"./screenshot.png")   
 
@@ -24,29 +35,17 @@ region.save(r"./crop_test1.png")
 
 
 
-f=open(r'./crop_test1.png','rb') 
-ls_f=base64.b64encode(f.read())
-f.close()
-s = bytes.decode(ls_f) 
-
-bodys[''] = "{\"uid\":\"118.12.0.12\",\"lang\":\"chns\",\"color\":\"color\",\"image\":\""+s+"\"}"
-post_data = bodys['']
-request = urllib.request.Request(url, str.encode(post_data))
-request.add_header('Authorization', 'APPCODE ' + appcode)
-
-request.add_header('Content-Type', 'application/json; charset=UTF-8')
-request.add_header('Content-Type', 'application/octet-stream')
-response = urllib.request.urlopen(request)
-content =  bytes.decode(response.read()) 
-if (content):
-   
-    decode_json = json.loads(content)
-    print(decode_json['textResult'])
+""" 读取图片 """
+def get_file_content(filePath):
+    with open(filePath, 'rb') as fp:
+        return fp.read()
+image = get_file_content(r"./crop_test1.png")
+respon = client.basicGeneral(image)
+title = respon['words_result'][0]['words']    #获取问题
+print(title)                 #打印内容
 
 
-#pyperclip.copy(''.join(decode_json['textResult'].split()))
-
-keyword = ''.join(decode_json['textResult'].split())    #识别的问题文本
+keyword = title    #识别的问题文本
 
 convey = 'n'
 
