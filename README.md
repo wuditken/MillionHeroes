@@ -10,9 +10,16 @@
 
 百度ocr：http://ai.baidu.com/tech/ocr/general
 
-# 需要的模块在命令行输入（pip install 模块名称） 安装
-模块名称： baidu-aip  lxml  Pillow  requests bs4
+# 使用教程
+1,安装ADB 驱动，可以到[这里下载](https://adb.clockworkmod.com/)<br />
+   安装 ADB 后，请在环境变量里将 adb 的安装路径保存到 PATH 变量里，确保 adb 命令可以被识别到
+  
+2.需要安装模块 在命令行输入(pip install 模块名称) 模块名称： baidu-aip  lxml  Pillow  requests bs4
 
+3.在hero.py里填写自己百度ocr的code
+
+4.连接手机，运行python hero.py<br />
+（只支持安卓手机）
 # 效果图
 ![截图](http://chuantu.biz/t6/198/1515261841x-1566687351.png)
 
