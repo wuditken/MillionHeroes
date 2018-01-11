@@ -3,7 +3,7 @@ from PIL import Image
 
 start = time.time()
 os.system("adb shell /system/bin/screencap -p /sdcard/screenshot.png") 
-os.system("adb pull /sdcard/screenshot.png d:/screenshot.png")  
+os.system("adb pull /sdcard/screenshot.png ./screenshot.png")  
 host = 'http://text.aliapi.hanvon.com'
 path = '/rt/ws/v1/ocr/text/recg'
 method = 'POST'
