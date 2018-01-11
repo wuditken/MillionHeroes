@@ -4,11 +4,11 @@
 # 用的是python3.6版本
 参考微信跳一跳助手，使用adb截图。👉[文字教程](https://zhuanlan.zhihu.com/p/32813854)
 
-# 把问题区域裁剪出来后用汉王的ocr识别出文本，然后调用百度搜索（把搜索到的前两个答案显示在屏幕）
+# 把问题区域裁剪出来后用百度的ocr识别出文本，然后调用百度搜索（把搜索到的前两个答案显示在屏幕）
 
 # 整个程序运行完估计5秒左右，还可以有时间答题（---）
 
-汉王ocr：https://market.aliyun.com/products/57124001/cmapi011523.html?spm=5176.730005.0.0.B1mZNd#sku=yuncode552300000
+百度ocr：http://ai.baidu.com/tech/ocr/general
 
 ![截图](http://chuantu.biz/t6/198/1515261841x-1566687351.png)
 
