@@ -41,6 +41,10 @@ def page(html):
     soup = BeautifulSoup(html, 'lxml')
     results = []
 
+    result_num = soup.find(class_='nums')
+    #print (soup)
+    print (str(result_num)[str(result_num).find("结果约")+3:-7])
+
     # 获取结果来源
     result_set = soup.find(id='content_left')  # 结果全显示在页面左边
     result_set = result_set.find_all('div', class_='c-container')  # 结果class固定，其余为硬广
