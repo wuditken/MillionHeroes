@@ -1,69 +1,37 @@
-import urllib.request, sys,base64,json,os,time,pyperclip,baiduSearch
-from PIL import Image
+import urllib.request, sys,base64,json,os,time,pyperclip,cropimage,ocr,map_
 
-start = time.time()
-os.system("adb shell /system/bin/screencap -p /sdcard/screenshot.png") 
-os.system("adb pull /sdcard/screenshot.png d:/screenshot.png")  
-host = 'http://text.aliapi.hanvon.com'
-path = '/rt/ws/v1/ocr/text/recg'
-method = 'POST'
-appcode = 'a962e94260ee4043b824d2f40c126d8e'    #汉王识别appcode（填你自己的）
-querys = 'code=74e51a88-41ec-413e-b162-bd031fe0407e'
-bodys = {}
-url = host + path + '?' + querys
-
-im = Image.open(r"D:\screenshot.png")   
-
-img_size = im.size
-w = im.size[0]
-h = im.size[1]
-print("xx:{}".format(img_size))
-
-region = im.crop((70,200, w-70,700))    #裁剪的区域
-region.save("d:/crop_test1.png")
+def million():
+	start = time.time()
+	os.system("adb shell /system/bin/screencap -p /sdcard/million/screenshot.png") 
+	os.system("adb pull /sdcard/million/screenshot.png d:/screenshot.png")  
 
 
 
-f=open('d:/crop_test1.png','rb') 
-ls_f=base64.b64encode(f.read())
-f.close()
-s = bytes.decode(ls_f) 
+	image_file = '11.jpg'
+	question_and_op = cropimage.crop(image_file)
 
-bodys[''] = "{\"uid\":\"118.12.0.12\",\"lang\":\"chns\",\"color\":\"color\",\"image\":\""+s+"\"}"
-post_data = bodys['']
-request = urllib.request.Request(url, str.encode(post_data))
-request.add_header('Authorization', 'APPCODE ' + appcode)
+	question = question_and_op[0]
+	op_a = question_and_op[1]
+	op_b = question_and_op[2]
+	op_c = question_and_op[3]
 
-request.add_header('Content-Type', 'application/json; charset=UTF-8')
-request.add_header('Content-Type', 'application/octet-stream')
-response = urllib.request.urlopen(request)
-content =  bytes.decode(response.read()) 
-if (content):
-   
-    decode_json = json.loads(content)
-    print(decode_json['textResult'])
+	print ('question')
+	#map_.map_baidu(ocr.ocr(question))
 
+	print ('op_a')
+	x = ocr.ocr(op_a)
+	print (x)
+	print (type(x))
+	print (len(x))
 
-#pyperclip.copy(''.join(decode_json['textResult'].split()))
+	print ('op_b')
+	#print (ocr.ocr(op_b))
 
-keyword = ''.join(decode_json['textResult'].split())    #识别的问题文本
+	print ('op_c')
+	#print (ocr.ocr(op_c))
 
-convey = 'n'
+	end = time.time()
+	print('程序用时：'+str(end-start)+'秒')
 
-if convey == 'y' or convey == 'Y':
-    results = baiduSearch.search(keyword, convey=True)
-elif convey == 'n' or convey == 'N' or not convey:
-    results = baiduSearch.search(keyword)
-else:
-    print('输入错误')
-    exit(0)
-count = 0
-for result in results:
-    #print('{0} {1} {2} {3} {4}'.format(result.index, result.title, result.abstract, result.show_url, result.url))  # 此处应有格式化输出
-	print('{0}'.format(result.abstract))  # 此处应有格式化输出
-	count=count+1
-	if(count == 2):
-		break
-
-end = time.time()
-print('程序用时：'+str(end-start)+'秒')
+if __name__ == '__main__':
+	million()
