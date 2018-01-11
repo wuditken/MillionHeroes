@@ -41,11 +41,14 @@ def get_file_content(filePath):
         return fp.read()
 image = get_file_content(r"./crop_test1.png")
 respon = client.basicGeneral(image)
-title = respon['words_result'][0]['words']    #获取问题
-print(title)                 #打印内容
+titles = respon['words_result']          #获取问题
+ans = ''
+for title in titles:
+      ans = ans +title['words']
 
+print(ans)       #打印问题
 
-keyword = title    #识别的问题文本
+keyword = ans    #识别的问题文本
 
 convey = 'n'
 
