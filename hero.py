@@ -7,7 +7,7 @@ def million():
 
 
 
-	image_file = '11.jpg'
+	image_file = '7.jpg'
 	question_and_op = cropimage.crop(image_file)
 
 	question_image = question_and_op[0]
@@ -21,13 +21,29 @@ def million():
 	op_a = ocr.ocr(op_a)
 	op_b = ocr.ocr(op_b)
 	op_c = ocr.ocr(op_c)
-	
+	'''
 	print (question)
 	print (op_a)
 	print (op_b)
 	print (op_c)
-	
-	result = map_.map_baidu(question)
+	'''
+
+	results = map_.map_baidu(question)
+	count = 0
+	for result in results:
+		#print('{0} {1} {2} {3} {4}'.format(result.index, result.title, result.abstract, result.show_url, result.url))  # 此处应有格式化输出
+		print('{0}'.format(result.abstract))  # 此处应有格式化输出
+		count=count+1
+		if(count == 2):
+			break
+
+	print ('----------------------------')
+	print (op_a)
+	map_.map_baidu(question+' '+op_a)
+	print (op_b)
+	map_.map_baidu(question+' '+op_b)
+	print (op_c)
+	map_.map_baidu(question+' '+op_c)
 
 	end = time.time()
 	print('程序用时：'+str(end-start)+'秒')
