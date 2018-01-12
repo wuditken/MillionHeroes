@@ -3,21 +3,20 @@ from PIL import Image,ImageEnhance
 from common import config,screenshot
 from aip import AipOcr
 from tools import aitext
-
+# 截图函数
 def get_screenshot():
   screenshot.pull_screenshot()
-
   im = Image.open(r"./screenshot.png")    #导入手机截图  
   img_size = im.size
   w = im.size[0]
-  h = im.size[1]
+  # h = im.size[1]
   print("xx:{}".format(img_size))
 
   region = im.crop((70,300, w-70,600))    #裁剪的区域,可以自己修改
   enh_con = ImageEnhance.Contrast(region)   
   image_contrasted = enh_con.enhance(1.5)
   image_contrasted.save("./crop_test1.png")   #提取题目截图
-
+# 内容显示
 def get_answer(filePath):
     with open(filePath, 'rb') as fp:
       image = fp.read()
@@ -44,8 +43,7 @@ def get_answer(filePath):
         count=count+1
         if(count == 2):      #这里限制了只显示2条结果，可以自己设置
           break
-
-
+# 词频显示
 def get_ai_answer(filePath):
   with open(filePath, 'rb') as fp:
       image = fp.read()
@@ -62,27 +60,12 @@ def get_ai_answer(filePath):
               answercount+=1
             else:
               issue = issue +title['words']
-
       print(issue)       #打印问题
       print('  A:'+answer[0]+' B:'+answer[1]+' C:'+answer[2])       #打印问题
-
       keyword = issue    #识别的问题文本
       ai=aitext.Ai(issue,answer)
       ai.search()
-
-
-
-
-# def show_answer(choice):
-#   if int(choice) == 1:
-#     get_ai_answer(r"./crop_test1.png")
-#   else:
-#     get_answer(r"./crop_test1.png")
-
-# choice = input("input: 词频显示-1 内容显示-2\n")
-# show_answer(choice)
-
-
+# 简易多线程
 threads = []
 t1 = threading.Thread(target=get_ai_answer,args=(r"./crop_test1.png",))
 threads.append(t1)
@@ -101,12 +84,11 @@ if __name__ == '__main__':
   # screenshot.check_screenshot()
   get_screenshot()
   client = AipOcr(APP_ID, API_KEY, SECRET_KEY)
-  
+  # 启动多线程
   for t in threads:
     t.start()
-  
   t.join()
-  
+  # 显示用时
   end = time.time()
   print('程序用时：'+str(end-start)+'秒')
 
