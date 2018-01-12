@@ -16,10 +16,9 @@ class Ai:
 		opener = urllib.request.build_opener()
 		opener.addheaders = [headers]
 		date = opener.open(url).read()
-		self.count += 1
 		try:
 			if "zhidao.baidu.com" in url:
-				str1=str(date,"gbk")
+				str1=date.decode('gbk').encode('utf-8').decode('utf-8')
 			else:
 				str1=str(date,"utf-8")
 			self.a += str1.count(self.answer[0])
@@ -27,8 +26,10 @@ class Ai:
 			self.c += str1.count(self.answer[2])
 			if self.answer[3] != '':
 				self.d += str1.count(self.answer[3])
+			self.count += 1
 			return 1
 		except:
+			self.count += 1
 			return 0
 	
 	def threhtml(self,url):
@@ -36,7 +37,9 @@ class Ai:
 
 	def search(self):
 		
-		baidu = self.threhtml("https://zhidao.baidu.com/search?lm=0&rn=10&pn=0&fr=search&ie=gbk&word="+urllib.parse.quote(self.issue))
+		baidusearch = self.threhtml('http://www.baidu.com/s?wd='+urllib.parse.quote(self.issue))
+
+		baidu = self.threhtml("https://zhidao.baidu.com/search?lm=0&rn=10&pn=0&fr=search&ie=gbk&word="+urllib.parse.quote(self.issue,encoding='gbk'))
 		
 		sousou = self.threhtml("http://wenwen.sogou.com/s/?w="+urllib.parse.quote(self.issue)+"&ch=ww.header.ssda")
 
@@ -45,7 +48,7 @@ class Ai:
 		so360 = self.threhtml("https://wenda.so.com/search/?q="+urllib.parse.quote(self.issue))
 
 		while 1:
-			if(self.count == 4):
+			if(self.count == 5):
 				break
 
 		return [self.a, self.b, self.c,self.d]
