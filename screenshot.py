@@ -9,7 +9,7 @@ from PIL import Image
 
 
 # SCREENSHOT_WAY 是截图方法，经过 check_screenshot 后，会自动递减，不需手动修改
-SCREENSHOT_WAY = 3
+SCREENSHOT_WAY = 1
 
 
 def pull_screenshot():

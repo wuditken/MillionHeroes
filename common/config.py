@@ -13,6 +13,7 @@ def open_accordant_config():
     调用配置文件
     """
     screen_size = _get_screen_size()
+    print(screen_size)
     config_file = "{path}/config/{screen_size}/config.json".format(
         path=sys.path[0],
         screen_size=screen_size
@@ -37,5 +38,7 @@ def _get_screen_size():
         sys.exit()
     m = re.search(r'(\d+)x(\d+)', size_str)
     if m:
-        return "{height}x{width}".format(height=m.group(2), width=m.group(1))
-    return "1920x1080"
+        #return "{height}x{width}".format(height=m.group(2), width=m.group(1))
+        #print("{width}x{height}".format(height=m.group(2), width=m.group(1)))
+        return "{width}x{height}".format(height=m.group(2), width=m.group(1))
+    return "1080x1920"

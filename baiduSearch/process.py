@@ -1,3 +1,4 @@
+# -*- coding:utf-8 -*-
 import requests
 from bs4 import BeautifulSoup
 
@@ -10,7 +11,7 @@ class Result(object):
         self.__title = r_title
         self.__abstract = r_abstract
         self.__show_url = show_url
-        self.__url = r_url
+        #self.__url = r_url
 
     @property
     def index(self):
@@ -28,9 +29,9 @@ class Result(object):
     def show_url(self):
         return self.__show_url
 
-    @property
-    def url(self):
-        return self.__url
+    # @property
+    # def url(self):
+    #     return self.__url
 
     def convey_url(self):
         self.__url = url(self.__url)
@@ -43,21 +44,24 @@ def page(html):
 
     # 获取结果来源
     result_set = soup.find(id='content_left')  # 结果全显示在页面左边
-    result_set = result_set.find_all('div', class_='c-container')  # 结果class固定，其余为硬广
-
+    if result_set is None:
+        print("抓取失败，跳过")
+        #return
+    else:
+        result_set = result_set.find_all('div', class_='c-container')  # 结果class固定，其余为硬广
+        #print(result_set)
+    #c_abstract = None
     for i in range(len(result_set)):  # 因为要index所以就用range来
         result = result_set[i]  # 其实就是result_div
-
-        t_and_u = __get_title_and_c_url(result)
-        c_title = t_and_u[0]  # 这个c_title就是title了
-        c_url = t_and_u[1]  # c_url是百度的url，需要转换
-        c_abstract = __get_abstract(result)  # 同title
-        c_show_url = __get_show_url(result)
-
-        result = Result(i + 1, c_title, c_abstract, c_show_url, c_url)
-        results.append(result)
-
-    return results
+        if 'result-op' not in result['class']:  # 不是软广
+            r_from = result.find(class_='c-abstract')
+            if not r_from:
+                return None
+            for em in r_from.find_all('em'):  # 移除abstract中的em标签
+                em.unwrap()
+            c_abstract = r_from.get_text()
+            print(c_abstract)
+    return
 
 
 def url(r_url):
