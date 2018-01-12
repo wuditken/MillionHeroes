@@ -21,7 +21,9 @@
 
 1. 参考微信跳一跳助手，使用adb上传手机截图
 
-2. 把问题区域裁剪出来后用汉王的[ocr识别](https://market.aliyun.com/products/57124001/cmapi011523.html?spm=5176.730005.0.0.B1mZNd#sku=yuncode552300000)出文本
+2. ~~把问题区域裁剪出来后用汉王的[ocr识别](https://market.aliyun.com/products/57124001/cmapi011523.html?spm=5176.730005.0.0.B1mZNd#sku=yuncode552300000)出文本~~
+
+    改用百度爸爸的[ocr](https://cloud.baidu.com/product/ocr/general)识别啦,申请注册免费500次！
 
 3. 然后调用百度搜索（把搜索到的前两个答案显示在屏幕）
 
