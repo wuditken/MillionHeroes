@@ -34,9 +34,9 @@ class Ai:
 
 
      self.count += 1
-     self.a += str1.count(self.answer[0])
-     self.b += str1.count(self.answer[1])
-     self.c += str1.count(self.answer[2])
+     self.a += str1.count(self.answer[0].replace('A', ''))
+     self.b += str1.count(self.answer[1].replace('B', ''))
+     self.c += str1.count(self.answer[2].replace('C', ''))
      
     def threhtml(self,url):    #开线程获得网页
         _thread.start_new_thread(self.gethtml,(url,))
@@ -56,7 +56,7 @@ class Ai:
 
 
          while 1:
-           if(self.count == 3):
+           if(self.count == 4):
                break
 
          dict = {self.a: 'A', self.b: 'B', self.c: 'C'}
