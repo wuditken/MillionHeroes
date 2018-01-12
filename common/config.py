@@ -13,18 +13,18 @@ def open_accordant_config():
     调用配置文件
     """
 #    screen_size = _get_screen_size()
-    config_file = "{path}/config/{screen_size}/config.json".format(
-        path=sys.path[0],
-        screen_size="1920x1080"
-    )
-    if os.path.exists(config_file):
-        with open(config_file, 'r') as f:
-            print("Load config file from {}".format(config_file))
-            return json.load(f)
-    else:
-        with open('{}/config/default.json'.format(sys.path[0]), 'r') as f:
-            print("载入默认配置,修改请见config/default.json")
-            return json.load(f)
+    # config_file = "{path}/config/{screen_size}/config.json".format(
+    #     path=sys.path[0],
+    #     screen_size="1920x1080"
+    # )
+    # if os.path.exists(config_file):
+    #     with open(config_file, 'r') as f:
+    #         print("Load config file from {}".format(config_file))
+    #         return json.load(f)
+    # else:
+    with open('{}/default.json'.format(sys.path[0]), 'r') as f:
+        # print("载入默认配置,修改请见config/default.json")
+        return json.load(f)
 
 
 def _get_screen_size():
