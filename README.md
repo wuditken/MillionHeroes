@@ -3,33 +3,33 @@
 
 >  答对12题，每题10秒，全答对瓜分百万奖金
 
-## 效果示意图
-### macOS
+# 把问题区域裁剪出来后用百度的ocr识别出文本，然后调用百度搜索（把搜索到的前两个答案显示在屏幕）
 
 ![截图](mac.png)
 
-### Windows
+# 使用教程
+1,安装ADB 驱动，可以到[这里下载](https://adb.clockworkmod.com/)<br />
+   安装 ADB 后，请在环境变量里将 adb 的安装路径保存到 PATH 变量里，确保 adb 命令可以被识别到
+  
+2.需要安装模块 在命令行输入(pip install 模块名称) 模块名称： baidu-aip  lxml  Pillow  requests bs4
 
-![截图](win.PNG)
+3.在hero.py里填写自己百度ocr的APPid</br>
+百度ocr：http://ai.baidu.com/tech/ocr/general
+
+4.连接手机<br>运行python hero.py (搜索百度的内容) <br>或test文件下的hero.py（搜素内容并统计词频）<br />
+（只支持安卓手机）
+# 效果图
+![截图](http://chuantu.biz/t6/198/1515261841x-1566687351.png)
+![截图](https://github.com/wuditken/MillionHeroes/blob/master/test/1.PNG?raw=true)
 
 
-## 安装使用
-[文字教程](https://zhuanlan.zhihu.com/p/32813854)
+一开始也想要tesseract来识别，但是经过测试太慢了要用10秒左右。
+# 大家有时间的话可以试试把它弄成全自动的
 
+有一个思路 就是把问题的选项答案也给识别出来，然后把百度搜出来的答案匹配选项答案，如果有答案直接一个模拟点击.
 
-## 原理说明
-
-1. 参考微信跳一跳助手，使用adb上传手机截图
-
-2. 把问题区域裁剪出来后用汉王的[ocr识别](https://market.aliyun.com/products/57124001/cmapi011523.html?spm=5176.730005.0.0.B1mZNd#sku=yuncode552300000)出文本
-
-3. 然后调用百度搜索（把搜索到的前两个答案显示在屏幕）
-
-> <font color=red size=4>整个程序运行完估计5~8秒左右，还可以有时间答题!强烈建议多人配合操作！！</font>
-
-# Todo
-1. 有一个思路 就是把问题的选项答案也给识别出来，然后把百度搜出来的答案匹配选项答案，如果有答案直接一个模拟点击。
-2. 优化百度的搜索，对题目进行分类，如小程序头脑王者题目，历史、文艺、流行等类别进行相关搜索，提高效率。
+# 交流学习（微信群）
+![截图](https://github.com/wuditken/MillionHeroes/blob/master/baiduSearch/de_qrcode.gif?raw=true)
 
 
 
