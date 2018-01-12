@@ -43,7 +43,7 @@ class Ai:
 
     def search(self):           #要搜索的引擎
         
-		 #可以自己添加搜索接口  self.threhtml(网址)
+		 #可以自己添加搜索接口  self.threhtml(网址) 并在59行代码加一个数
          baidu = self.threhtml("https://zhidao.baidu.com/search?lm=0&rn=10&pn=0&fr=search&ie=gbk&word="+urllib.parse.quote(self.issue,encoding='gbk'))
 
          sousou = self.threhtml("http://wenwen.sogou.com/s/?w="+urllib.parse.quote(self.issue)+"&ch=ww.header.ssda")
@@ -56,7 +56,7 @@ class Ai:
 
 
          while 1:
-           if(self.count == 4):
+           if(self.count == 4):       #这里是59行代码，如果你自己增加搜索接口(4改5)
                break
 
          dict = {self.a: 'A', self.b: 'B', self.c: 'C'}
