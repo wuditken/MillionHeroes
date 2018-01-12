@@ -1,7 +1,16 @@
 import urllib.request,time,_thread,urllib.parse
 
 class Ai:
-    
+
+    def biggest(self,a,b,c):  #获取出现次数最多的答案
+         if a>b:
+             maxnum = a
+         else:
+             maxnum = b
+         if c>maxnum:
+             maxnum=c
+         return maxnum
+
     def __init__(self,issue,answer): # 注意前后各两个下划线
         self.start = time.time()
         self.issue = issue
@@ -50,11 +59,18 @@ class Ai:
            if(self.count == 3):
                break
 
-        #str1=str(iask,"utf-8")
+         dict = {self.a: 'A', self.b: 'B', self.c: 'C'}
 
-         print('A  显示次数：' + str(self.a))
-         print('B  显示次数：' + str(self.b))
-         print('C  显示次数：' + str(self.c))
+         listselect = [self.a,self.b,self.c]
+         print('---------------------------------')
+         print(' 选项    出现次数  ')
+         print('  A：     ' + str(self.a))
+         print('  B：     ' + str(self.b))
+         print('  C：     ' + str(self.c))
+         print('---------------------------------')
+         print('  推荐答案：' + dict[self.biggest(self.a,self.b,self.c)])
+         print('---------------------------------')
+         print()
 
          end = time.time()
-         print('程序用时：'+str(end-self.start)+'秒')
+         print('搜索用时：'+str(end-self.start)+'秒')
