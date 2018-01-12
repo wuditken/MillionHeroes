@@ -12,10 +12,10 @@ def open_accordant_config():
     """
     调用配置文件
     """
-    screen_size = _get_screen_size()
+#    screen_size = _get_screen_size()
     config_file = "{path}/config/{screen_size}/config.json".format(
         path=sys.path[0],
-        screen_size=screen_size
+        screen_size="1920x1080"
     )
     if os.path.exists(config_file):
         with open(config_file, 'r') as f:

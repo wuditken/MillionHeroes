@@ -1,3 +1,4 @@
+# coding=utf-8
 import requests
 
 __url = 'http://www.baidu.com/s?wd='  # 搜索请求网址
