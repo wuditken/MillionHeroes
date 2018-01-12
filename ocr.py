@@ -3,9 +3,9 @@ from aip import AipOcr
 
 def ocr(path, image):
 	""" （百度ocr）你的 APPID AK SK """
-	APP_ID = '10675766'
-	API_KEY = '3LXbCnaZ5TUx9T5hpzyP7pw2'
-	SECRET_KEY = 'TfKCxzZxjyTxHhOm1k2o2C5RCHiW52tl'
+	APP_ID = '106757662'
+	API_KEY = '3LXbCnaZ5TUx9T5hpzyP7pw2j'
+	SECRET_KEY = 'TfKCxzZxjyTxHhOm1k2o2C5RCHiW52tll'
 	client = AipOcr(APP_ID, API_KEY, SECRET_KEY)
 
 	def get_file_content(filePath):
