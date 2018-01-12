@@ -17,9 +17,10 @@
 3.在hero.py里填写自己百度ocr的APPid</br>
 百度ocr：http://ai.baidu.com/tech/ocr/general
 
-4.连接手机，运行python hero.py<br />
+4.连接手机<br>运行python hero.py (搜索百度的内容) <br>或test文件下的hero.py（搜素内容并统计词频）<br />
 （只支持安卓手机）
 # 效果图
+![截图](http://chuantu.biz/t6/198/1515261841x-1566687351.png)
 ![截图](http://chuantu.biz/t6/198/1515261841x-1566687351.png)
 
 
