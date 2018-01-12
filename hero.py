@@ -1,5 +1,6 @@
 import urllib.request, sys,base64,json,os,time,baiduSearch,screenshot,re
 from PIL import Image
+from PIL import ImageEnhance
 from common import config
 #配置appcode
 config = config.open_accordant_config()
@@ -24,10 +25,11 @@ h = im.size[1]
 print("xx:{}".format(img_size))
 
 region = im.crop((70,300, w-70,600))    #裁剪的区域 百万超人 手机1080*1920 高度范围300~600
-region.save("./crop_test1.png")
-
-
+enh_con = ImageEnhance.Contrast(region)  
+contrast = 1.5  
+image_contrasted = enh_con.enhance(contrast)  
 image_contrasted.save("./crop_test.png")
+
 f=open('./crop_test.png','rb') 
 ls_f=base64.b64encode(f.read())
 f.close()
