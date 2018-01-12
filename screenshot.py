@@ -27,12 +27,12 @@ def pull_screenshot():
             binary_screenshot = binary_screenshot.replace(b'\r\n', b'\n')
         elif SCREENSHOT_WAY == 1:
             binary_screenshot = binary_screenshot.replace(b'\r\r\n', b'\n')
-        f = open('screenshot.png', 'wb')
+        f = open('./data/screenshot.png', 'wb')
         f.write(binary_screenshot)
         f.close()
     elif SCREENSHOT_WAY == 0:
         os.system('adb shell screencap -p /sdcard/screenshot.png')
-        os.system('adb pull /sdcard/screenshot.png .')
+        os.system('adb pull /sdcard/screenshot.png ./data')
 
 
 def check_screenshot():
@@ -40,9 +40,9 @@ def check_screenshot():
     检查获取截图的方式
     """
     global SCREENSHOT_WAY
-    if os.path.isfile('screenshot.png'):
+    if os.path.isfile('./data/screenshot.png'):
         try:
-            os.remove('screenshot.png')
+            os.remove('./data/screenshot.png')
         except Exception:
             pass
     if SCREENSHOT_WAY < 0:
@@ -50,7 +50,7 @@ def check_screenshot():
         sys.exit()
     pull_screenshot()
     try:
-        Image.open('./screenshot.png').load()
+        Image.open('./data/screenshot.png').load()
         print('采用方式 {} 获取截图'.format(SCREENSHOT_WAY))
     except Exception:
         SCREENSHOT_WAY -= 1

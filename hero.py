@@ -35,7 +35,7 @@ def start_answer():
 
     screenshot.pull_screenshot()
 
-    im = Image.open(r"./screenshot.png")
+    im = Image.open(r"./data/screenshot.png")
     screen_end = time.time()
     print('截图用时：' + str(screen_end - start) + '秒')
 
@@ -44,9 +44,9 @@ def start_answer():
 
     region = (tuple(region_kind))
     region = im.crop(region)
-    region.save("./crop_test1.png")
+    region.save("./data/crop_test1.png")
 
-    f = open('./crop_test1.png', 'rb')
+    f = open('./data/crop_test1.png', 'rb')
     img_data = f.read()
     f.close()
 
