@@ -6,7 +6,7 @@ def crop(path, file):
 	w = im.size[0]
 	h = im.size[1]
 
-	print("xx:{}".format(img_size))
+	#print("xx:{}".format(img_size))
 
 	region = im.crop((70/1080*w,220/1920*h, w-70/1080*w,1200/1920*h))    #裁剪的区域
 	saved_name = 'crop_'+file

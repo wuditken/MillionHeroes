@@ -1,7 +1,7 @@
 import urllib.request, sys, base64, json, os, time, pyperclip, cropimage, ocr, map_, auto_result, press
 import test as ai
 
-def million():
+def million(file):
 	start = time.time()
 
 	# 截屏
@@ -9,7 +9,8 @@ def million():
 
 	# path = 'd:/million/'
 	path = 'D:/LDJ/misc/misc/MillionHero/MillionHeroes-master'
-	file = 'screen.png'
+	# file = 'screen.png'
+	# file = '4.jpg'
 	os.system("adb shell /system/bin/screencap -p /sdcard/million/screenshot.png") 
 	os.system("adb pull /sdcard/million/screenshot.png "+path+'/origin/'+file)
 
@@ -20,7 +21,7 @@ def million():
 	size = crop[1]
 
 	end = time.time()
-	print('裁剪用时：'+str(end-start)+'秒')
+	#print('裁剪用时：'+str(end-start)+'秒')
 
 	print ('')
 
@@ -33,13 +34,13 @@ def million():
 	option_d = all_ocr[1][3]
 
 	step_1 = time.time()
-	print('题目识别用时：'+str(step_1-start)+'秒')
+	#print('题目识别用时：'+str(step_1-start)+'秒')
 
 	# 搜索问题
-	results = map_.map_baidu(question, 1)
-
+	#results = map_.map_baidu(question, 1)
+	print (question)
 	step_2 = time.time()
-	print('题目搜索用时：'+str(step_2-step_1)+'秒')
+	#print('题目搜索用时：'+str(step_2-step_1)+'秒')
 
 	print ('----------------------------')
 
@@ -61,13 +62,13 @@ def million():
 	print (dict_op[recommand])
 
 	step_4 = time.time()
-	print('选项搜索用时：'+str(step_4-step_2)+'秒')
+	#print('选项搜索用时：'+str(step_4-step_2)+'秒')
 
 	# 模拟按下选项
-	print (press.press(recommand, size))
+	#print (press.press(recommand, size))
 
 	end = time.time()
-	print('程序用时：'+str(end-start)+'秒')
+	#print('程序用时：'+str(end-start)+'秒')
 
 # 挂机控制
 def auto_run():
