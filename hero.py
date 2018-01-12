@@ -1,30 +1,22 @@
-import urllib.request, sys,base64,json,os,time,baiduSearch
+import urllib.request, sys,base64,json,os,time,baiduSearch,threading
 from PIL import Image,ImageEnhance
 from common import config,screenshot
 from aip import AipOcr
 from tools import aitext
-#导入配置百度ocr
-config = config.open_accordant_config()
-APP_ID = config['app_id']
-API_KEY = config['app_key']
-SECRET_KEY = config['app_secret']
-# 开始截图
-start = time.time()
-# screenshot.check_screenshot()
-screenshot.pull_screenshot()
 
-im = Image.open(r"./screenshot.png")    #导入手机截图  
-img_size = im.size
-w = im.size[0]
-h = im.size[1]
-print("xx:{}".format(img_size))
+def get_screenshot():
+  screenshot.pull_screenshot()
 
-region = im.crop((70,300, w-70,600))    #裁剪的区域,可以自己修改
-enh_con = ImageEnhance.Contrast(region)   
-image_contrasted = enh_con.enhance(1.5)
-image_contrasted.save("./crop_test1.png")   #提取题目截图
-client = AipOcr(APP_ID, API_KEY, SECRET_KEY)
+  im = Image.open(r"./screenshot.png")    #导入手机截图  
+  img_size = im.size
+  w = im.size[0]
+  h = im.size[1]
+  print("xx:{}".format(img_size))
 
+  region = im.crop((70,300, w-70,600))    #裁剪的区域,可以自己修改
+  enh_con = ImageEnhance.Contrast(region)   
+  image_contrasted = enh_con.enhance(1.5)
+  image_contrasted.save("./crop_test1.png")   #提取题目截图
 
 def get_answer(filePath):
     with open(filePath, 'rb') as fp:
@@ -80,9 +72,41 @@ def get_ai_answer(filePath):
 
 
 
-get_ai_answer(r"./crop_test1.png")
+
+# def show_answer(choice):
+#   if int(choice) == 1:
+#     get_ai_answer(r"./crop_test1.png")
+#   else:
+#     get_answer(r"./crop_test1.png")
+
+# choice = input("input: 词频显示-1 内容显示-2\n")
+# show_answer(choice)
 
 
+threads = []
+t1 = threading.Thread(target=get_ai_answer,args=(r"./crop_test1.png",))
+threads.append(t1)
+t2 = threading.Thread(target=get_answer,args=(r"./crop_test1.png",))
+threads.append(t2)
 
-end = time.time()
-print('程序用时：'+str(end-start)+'秒')
+
+if __name__ == '__main__':
+  #导入配置百度ocr
+  config = config.open_accordant_config()
+  APP_ID = config['app_id']
+  API_KEY = config['app_key']
+  SECRET_KEY = config['app_secret']
+  # 开始截图
+  start = time.time()
+  # screenshot.check_screenshot()
+  get_screenshot()
+  client = AipOcr(APP_ID, API_KEY, SECRET_KEY)
+  
+  for t in threads:
+    t.start()
+  
+  t.join()
+  
+  end = time.time()
+  print('程序用时：'+str(end-start)+'秒')
+
