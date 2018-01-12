@@ -21,7 +21,7 @@
 （只支持安卓手机）
 # 效果图
 ![截图](http://chuantu.biz/t6/198/1515261841x-1566687351.png)
-![截图](http://chuantu.biz/t6/198/1515261841x-1566687351.png)
+![截图](https://github.com/wuditken/MillionHeroes/blob/master/test/1.PNG?raw=true)
 
 
 一开始也想要tesseract来识别，但是经过测试太慢了要用10秒左右。
