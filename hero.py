@@ -1,24 +1,13 @@
-
-# coding:utf-8
-import urllib,requests,sys,base64,json,os,time,baiduSearch
-import pdb
-import re
-#import screenshot
-from PIL import Image,ImageEnhance
+import urllib.request, sys,base64,json,os,time,baiduSearch,screenshot,re
+from PIL import Image
 from common import config
-import tesserocr 
-import codecs
 #配置appcode
-#pdb.set_trace()
 config = config.open_accordant_config()
 
 start = time.time()
 # 开始截图
-#screenshot.check_screenshot()
-os.system('adb shell screencap -p /sdcard/screen.png')
-os.system('adb pull /sdcard/screen.png')
-
-#screenshot.pull_screenshot()
+screenshot.check_screenshot()
+screenshot.pull_screenshot()
 host = 'http://text.aliapi.hanvon.com'
 path = '/rt/ws/v1/ocr/text/recg'
 method = 'POST'
@@ -27,31 +16,15 @@ querys = 'code=74e51a88-41ec-413e-b162-bd031fe0407e'
 bodys = {}
 url = host + path + '?' + querys
 
-im = Image.open("./screen.png").convert('L') 
-#im = Image.open("./test.jpeg").convert('L') 
+im = Image.open(r"./screenshot.png")   
 
 img_size = im.size
 w = im.size[0]
 h = im.size[1]
-#print("xx:{}".format(img_size))
+print("xx:{}".format(img_size))
 
-region = im.crop((70,300, w-70,1450))    #裁剪的区域 百万超人 手机1080*1920 高度范围300~600
-enh_con = ImageEnhance.Contrast(region)  
-contrast = 1.5  
-image_contrasted = enh_con.enhance(contrast)  
-
-'''
-print tesserocr.tesseract_version()  # print tesseract-ocr version
-print tesserocr.get_languages()  # prints tessdata path and list of available languages
-
-print tesserocr.image_to_text(image_contrasted)  # print ocr text from image
-# or
-#print tesserocr.file_to_text('sample.jpg')
-#image_contrasted.show()
-'''
-
-
-
+region = im.crop((70,300, w-70,600))    #裁剪的区域 百万超人 手机1080*1920 高度范围300~600
+region.save("./crop_test1.png")
 
 
 image_contrasted.save("./crop_test.png")
@@ -73,46 +46,10 @@ if (content):
     decode_json = json.loads(content)
     print(decode_json['textResult'])
 
-'''
-
-f=open('./crop_test.png','rb') 
-ls_f=base64.b64encode(f.read())
-f.close()
-#s = bytes.decode(ls_f) 
-bodys[''] = "{\"uid\":\"118.12.0.12\",\"lang\":\"chns\",\"color\":\"gray\",\"image\":\""+ls_f+"\"}"
-post_data = bodys['']
-#request = urllib2.Request(url, str.encode(post_data))
-request = urllib.request.Request(url,post_data)
-request.add_header('Authorization', 'APPCODE ' + appcode)
-
-request.add_header('Content-Type', 'application/json; charset=UTF-8')
-request.add_header('Content-Type', 'application/octet-stream')
-response = urllib.requests.urlopen(request)
-content = response.read()
-if (content):
-   
-    decode_json = json.loads(content)
-    print(decode_json['textResult'])
-#pyperclip.copy(''.join(decode_json['textResult'].split()))
-'''
-
 text=decode_json['textResult']
 
 text = re.sub(r"\d+.","",text,1)
 
-'''
-f = codecs.open(r'./1.txt', 'w', encoding='utf-8')
-f.write(text)
-f.close()
-
-f = codecs.open(r'./1.txt', 'r', encoding='utf-8')
-text=f.read()
-f.close()
-
-text = re.sub(r"\d+.","",text,1)
-print (text)
-
-'''
 qm_pos=text.find("?")
 #print qm_pos
 if qm_pos==-1:
@@ -129,20 +66,6 @@ if u'' in answers:
 #print (answers)
 
 
-#keyword = ''.join(decode_json['textResult'].split())    #识别的问题文本
-#keyword = re.sub(r"\d+.","",keyword,1)
-#convey = 'n'
-
-'''
-if convey == 'y' or convey == 'Y':
-    results = baiduSearch.search(keyword, convey=True)
-elif convey == 'n' or convey == 'N' or not convey:
-    results = baiduSearch.search(keyword)
-else:
-    print('输入错误')
-    exit(0)
-
-'''
 count = 0
 results = baiduSearch.search(question)
 content=''
