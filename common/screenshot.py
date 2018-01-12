@@ -32,7 +32,7 @@ def pull_screenshot():
         f.close()
     elif SCREENSHOT_WAY == 0:
         os.system('adb shell screencap -p /sdcard/screenshot.png')
-        os.system('adb pull /sdcard/screenshot.png .')
+        os.system('adb pull /sdcard/screenshot.png ./')
 
 
 def check_screenshot():

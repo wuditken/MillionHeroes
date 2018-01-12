@@ -23,7 +23,7 @@ def open_accordant_config():
             return json.load(f)
     else:
         with open('{}/config/default.json'.format(sys.path[0]), 'r') as f:
-            print("Load default config")
+            print("载入默认配置,修改请见config/default.json")
             return json.load(f)
 
 

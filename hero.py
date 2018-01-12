@@ -1,15 +1,16 @@
-import urllib.request, sys,base64,json,os,time,baiduSearch,screenshot
+import urllib.request, sys,base64,json,os,time,baiduSearch
 from PIL import Image,ImageEnhance
-from common import config
+from common import config,screenshot
 from aip import AipOcr
+from tools import aitext
 #导入配置百度ocr
 config = config.open_accordant_config()
-APP_ID = config['appcode']
+APP_ID = config['app_id']
 API_KEY = config['app_key']
 SECRET_KEY = config['app_secret']
 # 开始截图
 start = time.time()
-screenshot.check_screenshot()
+# screenshot.check_screenshot()
 screenshot.pull_screenshot()
 
 im = Image.open(r"./screenshot.png")    #导入手机截图  
@@ -58,6 +59,39 @@ for result in results:
 	count=count+1
 	if(count == 2):      #这里限制了只显示2条结果，可以自己设置
 		break
+
+
+
+
+""" 读取图片 """
+def get_answer(filePath):
+    with open(filePath, 'rb') as fp:
+        image = fp.read()
+        respon = client.basicGeneral(image)
+        titles = respon['words_result']          #获取问题
+        issue = ''
+        answer = ['','','','','','']
+        countone = 0
+        answercount = 0
+        for title in titles:
+              countone+=1
+              if(countone >=len(titles)-2):
+                answer[answercount] = title['words']
+                answercount+=1
+              else:
+                issue = issue +title['words']
+
+        print(issue)       #打印问题
+        print('  A:'+answer[0]+' B:'+answer[1]+' C:'+answer[2])       #打印问题
+
+        keyword = issue    #识别的问题文本
+        ai=aitext.Ai(issue,answer)
+        ai.search()
+
+
+
+image = get_file_content(r"./crop_test1.png")
+
 
 
 end = time.time()
