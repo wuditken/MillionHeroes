@@ -1,7 +1,7 @@
-import urllib.request, sys,base64,json,os,time
+import urllib.request, sys,base64,json,os,time,string,re
 from PIL import Image
 from aip import AipOcr
-from aitext import Ai   
+from aitext import Ai
 
 start = time.time()
 os.system("adb shell /system/bin/screencap -p /sdcard/screenshot.png") 
@@ -41,7 +41,7 @@ def get_file_content(filePath):
     with open(filePath, 'rb') as fp:
         return fp.read()
 image = get_file_content(r"./crop_test1.png")
-respon = client.basicGeneral(image)
+respon = client.basicGeneral(image)   #用完500次后可改 respon = client.basicAccurate(image) 这个还可用50次 
 titles = respon['words_result']          #获取问题
 issue = ''
 answer = ['','','','','','']
@@ -55,8 +55,16 @@ for title in titles:
       else:
         issue = issue +title['words']
 
+
+tissue = issue[1:2]
+if str.isdigit(tissue):            #去掉题目索引
+     issue = issue[3:]   
+else:
+     issue = issue[2:]
+
 print(issue)       #打印问题
-print('  A:'+answer[0]+' B:'+answer[1]+' C:'+answer[2])       #打印问题
+print('  A:'+answer[0]+' B:'+answer[1]+' C:'+answer[2])       #打印答案
+
 
 keyword = issue    #识别的问题文本
 

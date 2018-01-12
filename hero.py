@@ -40,11 +40,17 @@ def get_file_content(filePath):
     with open(filePath, 'rb') as fp:
         return fp.read()
 image = get_file_content(r"./crop_test1.png")
-respon = client.basicGeneral(image)
+respon = client.basicGeneral(image)   #用完500次后可改respon = client.basicAccurate(image) 
 titles = respon['words_result']          #获取问题
 ans = ''
 for title in titles:
       ans = ans +title['words']
+
+tissue = ans[1:2]
+if str.isdigit(tissue):            #去掉题目索引
+     ans = ans[3:]   
+else:
+     ans = ans[2:]
 
 print(ans)       #打印问题
 
