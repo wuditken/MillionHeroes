@@ -11,7 +11,6 @@ from PIL import Image
 # SCREENSHOT_WAY 是截图方法，经过 check_screenshot 后，会自动递减，不需手动修改
 SCREENSHOT_WAY = 3
 
-
 def pull_screenshot():
     """
     获取屏幕截图，目前有 0 1 2 3 四种方法，未来添加新的平台监测方法时，

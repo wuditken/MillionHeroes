@@ -5,6 +5,7 @@ from aip import AipOcr
 from tools import aitext
 # 截图函数
 def get_screenshot():
+  screenshot.check_screenshot()
   screenshot.pull_screenshot()
   im = Image.open(r"./screenshot.png")    #导入手机截图  
   img_size = im.size
@@ -61,7 +62,7 @@ def get_ai_answer(filePath):
             else:
               issue = issue +title['words']
       print(issue)       #打印问题
-      print('  A:'+answer[0]+' B:'+answer[1]+' C:'+answer[2])       #打印问题
+      # print('  A:'+answer[0]+' B:'+answer[1]+' C:'+answer[2])       #打印问题
       keyword = issue    #识别的问题文本
       ai=aitext.Ai(issue,answer)
       ai.search()
@@ -74,16 +75,20 @@ threads.append(t2)
 
 
 if __name__ == '__main__':
-  #导入配置百度ocr
+  
+  # 导入配置百度ocr
   config = config.open_accordant_config()
   APP_ID = config['app_id']
   API_KEY = config['app_key']
   SECRET_KEY = config['app_secret']
   # 开始截图
   start = time.time()
-  # screenshot.check_screenshot()
+  # 默认方式3截图,与系统有关,若多次check后方式为2,1,0请酌情于common/screenshot自行修改
   get_screenshot()
+  # 调用baiduOCR识别
   client = AipOcr(APP_ID, API_KEY, SECRET_KEY)
+  # get_ai_answer(r'./crop_test1.png')
+  # get_answer(r'./crop_test1.png')
   # 启动多线程
   for t in threads:
     t.start()
