@@ -31,6 +31,7 @@
 
 # 交流学习（微信群）
 ![截图](https://github.com/wuditken/MillionHeroes/blob/master/baiduSearch/de_qrcode.gif?raw=true)
+### QQ群:645714857
 
 
 
