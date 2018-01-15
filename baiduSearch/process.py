@@ -1,6 +1,10 @@
 # -*- coding:utf-8 -*-
 import requests
 from bs4 import BeautifulSoup
+import io
+import sys
+# sys_coding = sys.getdefaultencoding()
+# sys.stdout = io.TextIOWrapper(sys.stdout.buffer,encoding=sys_coding) #去除编码错误，同时避免中文乱码
 
 
 # 定义返回的result类

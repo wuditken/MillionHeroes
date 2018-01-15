@@ -9,8 +9,7 @@ from PIL import Image
 
 
 # SCREENSHOT_WAY 是截图方法，经过 check_screenshot 后，会自动递减，不需手动修改
-SCREENSHOT_WAY = 1
-
+SCREENSHOT_WAY = 3
 
 def pull_screenshot():
     """
@@ -27,12 +26,12 @@ def pull_screenshot():
             binary_screenshot = binary_screenshot.replace(b'\r\n', b'\n')
         elif SCREENSHOT_WAY == 1:
             binary_screenshot = binary_screenshot.replace(b'\r\r\n', b'\n')
-        f = open('./data/screenshot.png', 'wb')
+        f = open('./screenshot.png', 'wb')
         f.write(binary_screenshot)
         f.close()
     elif SCREENSHOT_WAY == 0:
         os.system('adb shell screencap -p /sdcard/screenshot.png')
-        os.system('adb pull /sdcard/screenshot.png ./data')
+        os.system('adb pull /sdcard/screenshot.png ./')
 
 
 def check_screenshot():
@@ -40,9 +39,9 @@ def check_screenshot():
     检查获取截图的方式
     """
     global SCREENSHOT_WAY
-    if os.path.isfile('./data/screenshot.png'):
+    if os.path.isfile('screenshot.png'):
         try:
-            os.remove('./data/screenshot.png')
+            os.remove('screenshot.png')
         except Exception:
             pass
     if SCREENSHOT_WAY < 0:
@@ -50,7 +49,7 @@ def check_screenshot():
         sys.exit()
     pull_screenshot()
     try:
-        Image.open('./data/screenshot.png').load()
+        Image.open('./screenshot.png').load()
         print('采用方式 {} 获取截图'.format(SCREENSHOT_WAY))
     except Exception:
         SCREENSHOT_WAY -= 1
