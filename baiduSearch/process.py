@@ -2,7 +2,9 @@ import requests
 from bs4 import BeautifulSoup
 import io
 import sys
-sys.stdout = io.TextIOWrapper(sys.stdout.buffer,encoding='gb18030') #去除编码错误，同时避免中文乱码
+
+type = sys.getfilesystemencoding()
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer,encoding=type) #去除编码错误，同时避免中文乱码
 
 # 定义返回的result类
 class Result(object):
