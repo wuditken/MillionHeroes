@@ -29,9 +29,8 @@
 
 有一个思路 就是把问题的选项答案也给识别出来，然后把百度搜出来的答案匹配选项答案，如果有答案直接一个模拟点击.
 
-# 交流学习（微信群）
-![截图](https://github.com/wuditken/MillionHeroes/blob/master/baiduSearch/de_qrcode.gif?raw=true)
-### QQ群:645714857
+# 交流学习
+### QQ群:675516092
 
 
 
