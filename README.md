@@ -29,7 +29,8 @@
 
 有一个思路 就是把问题的选项答案也给识别出来，然后把百度搜出来的答案匹配选项答案，如果有答案直接一个模拟点击.
 
-
+#微信交流
+![截图](https://github.com/wuditken/MillionHeroes/blob/master/test/2.jpg?raw=true)
 
 
 
