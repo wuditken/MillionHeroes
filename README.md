@@ -20,7 +20,6 @@
 4.连接手机<br>运行python hero.py (搜索百度的内容) <br>或test文件下的hero.py（搜素内容并统计词频）<br />
 （只支持安卓手机）
 # 效果图
-![截图](http://chuantu.biz/t6/198/1515261841x-1566687351.png)
 ![截图](https://github.com/wuditken/MillionHeroes/blob/master/test/1.PNG?raw=true)
 
 
